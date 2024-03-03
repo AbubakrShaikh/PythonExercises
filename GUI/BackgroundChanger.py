@@ -10,9 +10,9 @@ def blue_change():
 window = Tk()
 
 red_btn = Button(window, text="Change to Red", command=red_change)
-btn.pack()
+red_btn.pack()
 
 blue_btn = Button(window, text="Change to Red", command=blue_change)
-btn.pack()
+blue_btn.pack()
 
 window. mainloop()
