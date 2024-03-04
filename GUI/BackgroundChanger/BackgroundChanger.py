@@ -12,7 +12,7 @@ window = Tk()
 red_btn = Button(window, text="Change to Red", command=red_change)
 red_btn.pack()
 
-blue_btn = Button(window, text="Change to Red", command=blue_change)
+blue_btn = Button(window, text="Change to Blue", command=blue_change)
 blue_btn.pack()
 
 window. mainloop()
