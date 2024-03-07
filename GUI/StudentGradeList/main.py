@@ -1,4 +1,4 @@
-#Import
+# Import module 
 from tkinter import *
 
 #Classes
@@ -12,13 +12,10 @@ class Student:
     def grade_level(self, grade):
         self.grade = grade
 
-    #Define Student ID
-
-
-    #Retrieve Student Name, Grade & ID
-
-
-#Command to Input Student ID
+# Change the label text 
+def show(): 
+    label.config( text = clicked.get() )
+    
 def add_id():
     no = int(input("Enter the student's position number on the list"))
     
@@ -33,28 +30,41 @@ def add_id():
     s_name_id = s_name, s_id
     name_id_list.insert(no, s_name_id)
     print(name_id_list)
-    
-#Command to Input Student Grade
 
 
-#Command to Retrieve Student Grade
-
-
-#Program Start
+# Create object 
 window = Tk()
-
-#Create List to Input Student Names & ID
-name_id_list = Listbox()
+  
+# Adjust size 
+window.geometry( "200x200" ) 
+  
+# Dropdown menu name_id_list 
+name_id_list = ["No Selection"]
 
 store_name_list=[]
 
 store_id_list=[]
 
+
+# datatype of menu text 
+clicked = StringVar() 
+  
+# Create Dropdown menu 
+drop = OptionMenu( window , clicked , *name_id_list ) 
+drop.pack() 
+  
+# Create button, it will change label text
 add_name_btn = Button(window, text="Add Name", command=add_id)
 add_name_btn.pack()
 
+button = Button( window , text = "Show Grade" , command = show ).pack() 
 
 
-name_id_list.pack()
+# Create Label 
+label = Label( window , text="a" )#Add Grade 
+label.pack() 
+  
+# Execute tkinter 
 window.mainloop()
-#Create Button to Retrieve Student Grade 
+
+#https://www.geeksforgeeks.org/tkinter-optionmenu-widget/
