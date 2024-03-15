@@ -8,7 +8,15 @@ asked = []
 #Questions and answers
 questions_answers = {
     1: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
-    2: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
+    2: ["Which one of these is the fastest shark?", 'Shortfin Mako', 'Blue', 'Great White', 'Thresher', 'Shortfin Mako', 1],
+    3: ["What is the top speed achieved by a shark (kph)?", '50', '75', '110', '64', '75', 2],
+    4: ["Which animal has the strongest bite", 'Great White Shark', 'American Alligator', 'Saltwater Crocodile', 'Polar Bear', 'Saltwater Crocodile', 3],
+    5: ["What is the tail fin of a shark also known as?", 'Dorsal fin', 'Caudal Fin', 'Pectoral Fin', 'Adipose Fin', 'Caudal Fin', 1],
+    6: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', '', '', 1],
+    7: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
+    8: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
+    9: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
+    10: ["What is the longest shark on average out of these?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
 }
 
 def randomiser():
