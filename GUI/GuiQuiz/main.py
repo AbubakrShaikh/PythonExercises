@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 
+score = 0
 names = []
 global questions_answers
 asked = []
@@ -11,12 +12,12 @@ questions_answers = {
     2: ["Which one of these is the fastest Shark?", 'Shortfin Mako', 'Blue', 'Great White', 'Thresher', 'Shortfin Mako', 1],
     3: ["What is the top speed achieved by a Shark (kph)?", '50', '75', '110', '64', '75', 2],
     4: ["Which animal has the strongest bite", 'Great White Shark', 'American Alligator', 'Saltwater Crocodile', 'Polar Bear', 'Saltwater Crocodile', 3],
-    5: ["What is the tail fin of a Shark also known as?", 'Dorsal fin', 'Caudal Fin', 'Pectoral Fin', 'Adipose Fin', 'Caudal Fin', 1],
+    5: ["What is the tail fin of a Shark also known as?", 'Dorsal fin', 'Caudal Fin', 'Pectoral Fin', 'Adipose Fin', 'Caudal Fin', 2],
     6: ["Which Shark is not real?", 'Goblin', 'Ghost', 'Wobbegong', 'Abysstalon', 'Abysstalon', 4],
     7: ["What is the head of a Hammerhead Shark used for?", 'Detecting Enemies', 'Greater Speed', 'Finding Food', 'More Agility', 'Finding Food', 3],
-    8: ["Which of these Sharks does a Killer Whale?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Basking Shark', 1],
+    8: ["Which of these Sharks does a Killer Whale eat?", 'Basking Shark', 'Great Hammerhead Shark', 'Greenland', 'Great White', 'Great White', 4],
     9: ["What is can a Shark sense apart from the 5 senses?", 'Blood', 'Urine', 'Weather', 'Electricity', 'Electricity', 4],
-    10: ["Where in the world do people get attacked by Sharks the most?", 'Australia', 'South Carolina', 'Florida', 'Hawaii', 'Florida', 4],
+    10: ["Where in the world do people get attacked by Sharks the most?", 'Australia', 'South Carolina', 'Florida', 'Hawaii', 'Florida', 3],
 }
 
 def randomiser():
@@ -37,7 +38,7 @@ class EntryPage:
         self.initial_frame.grid()
 
         #Main heading for the quiz
-        self.main_label = Label(self.initial_frame, text="GUI Quiz", font = ("Helvetica", 20, "bold"), bg = back_color)   
+        self.main_label = Label(self.initial_frame, text="Shark Quiz", font = ("Helvetica", 20, "bold"), bg = back_color)   
         self.main_label.grid(row = 0, padx = 10, pady = 20)
 
         #Holds the value of the inputs
@@ -82,23 +83,73 @@ class Quiz:
         self.var1 = IntVar()
 
         #1st radio button
-        self.rb1 = Radiobutton (self.initial_frame, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg = back_color, value = 1, variable = self.var1, pady = 10)
+        self.rb1 = Radiobutton(self.initial_frame, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg = back_color, value = 1, variable = self.var1, pady = 10)
         self.rb1.grid(row = 1, sticky=W)
 
         #2nd radio button
-        self.rb2 = Radiobutton (self.initial_frame, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg = back_color, value = 2, variable = self.var1, pady = 10)
+        self.rb2 = Radiobutton(self.initial_frame, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg = back_color, value = 2, variable = self.var1, pady = 10)
         self.rb2.grid(row = 2, sticky=W)
 
         #3rd radio button
-        self.rb3 = Radiobutton (self.initial_frame, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg = back_color, value = 3, variable = self.var1, pady = 10)
+        self.rb3 = Radiobutton(self.initial_frame, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg = back_color, value = 3, variable = self.var1, pady = 10)
         self.rb3.grid(row = 3, sticky=W)
 
         #4th radio button
-        self.rb4 = Radiobutton (self.initial_frame, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg = back_color, value = 4, variable = self.var1, pady = 10)
+        self.rb4 = Radiobutton(self.initial_frame, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg = back_color, value = 4, variable = self.var1, pady = 10)
         self.rb4.grid(row = 4, sticky=W)
 
-        self.confirm_button = Button(self.initial_frame, text ="Confirm", bg = "Red")
+        self.confirm_button = Button(self.initial_frame, text ="Confirm",font = ("13"), bg = "Red", command = self.test_progress)
         self.confirm_button.grid(row = 5)
+
+        self.score_label = Label(self.initial_frame, text="SCORE", font=("Tw Cen MT", "16"), bg = back_color)
+        self.score_label.grid(row = 6, pady = 1)
+    #Editing the question label and radio buttons
+    def questions_setup(self):
+        randomiser()
+        if len(asked)>9:
+            self.confirm_button.config(text="End Quiz", command=self.end_quiz)
+        self.var1.set(0)
+        self.question_label.config(text = questions_answers[qnum][0])
+        self.rb1.config(text = questions_answers[qnum][1])
+        self.rb2.config(text = questions_answers[qnum][2])
+        self.rb3.config(text = questions_answers[qnum][3])
+        self.rb4.config(text = questions_answers[qnum][4])
+
+    def test_progress(self):
+        global score
+        scr_label = self.score_label
+        choice = self.var1.get()
+        if len(asked)>9:
+            if choice == 0:
+                self.confirm_button.config(text = " Please select an answer")
+                choice=self.var1.get()
+            else:
+                if choice == questions_answers[qnum][6]:
+                    score += 1
+                    scr_label.config(text=score)
+                    self.confirm_button.config(text="Confirm")
+
+                else:
+                    score += 0 
+                    scr_label.config(text = "The correct answer was " + questions_answers[qnum][5])
+                    self.confirm_button.config(text="Confirm")
+        else:
+            if choice == 0:
+                self.confirm_button.config(text = " Please select an answer")
+                choice=self.var1.get()
+            else:
+                if choice == questions_answers[qnum][6]:
+                    score += 1
+                    scr_label.config(text=score)
+                    self.confirm_button.config(text="Confirm")
+                    self.questions_setup()
+                else:
+                    score
+                    scr_label.config(text = "The correct answer was " + questions_answers[qnum][5])
+                    self.confirm_button.config(text="Confirm")
+                    self.questions_setup()
+    def end_quiz(self):
+        window.destroy()
 #This is the main window which will hold all the instances/frames for the quiz    
 
 window = Tk()
